@@ -1,7 +1,9 @@
 // www/js/userService.js  get user data and send it to server
-(function() {
+(function () {
   function _UserService($q, config, $http, localStorageService, $state) {
+
     var user;
+
     function loginUser(post) {
       var deferred = $q.defer();
 
@@ -10,6 +12,7 @@
           if (data.error || !data.user) {
             deferred.reject(data.error);
           }
+
           localStorageService.set('user', data.user);
           user = data.user;
 
@@ -18,8 +21,7 @@
         .error(function () {
           deferred.reject('error');
         });
-
-        return deferred.promise;
+      return deferred.promise;
     }
 
     function logoutUser() {
@@ -52,8 +54,7 @@
         .error(function () {
           deferred.reject('error');
         });
-
-        return deferred.promise;
+      return deferred.promise;
     }
 
     return {
@@ -72,10 +73,7 @@
     };
   }
 
-  _UserService.$inject = [
-    '$q', 'Config', '$http', 'localStorageService',
-    '$state', '$cordovaPush', '$ionicPlatform'
-  ];
+  _UserService.$inject = ['$q', 'Config', '$http', 'localStorageService', '$state', '$cordovaPush', '$ionicPlatform'];
 
   angular.module('app.services')
     .factory('UserService', _UserService)

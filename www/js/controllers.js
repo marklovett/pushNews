@@ -1,15 +1,47 @@
-// www/js/controllers.js
+angular.module('app.controllers')
 
-.controller('LoginCtrl', function ($scope, $state, $cordovaOauth, 
-                                   UserService, Config, $ionicPlatform,
-                                   $ionicLoading, $cordovaPush) {
-  if (UserService.current()) {
-    $state.go('tab.news');
-  }
-  $scope.twitter = function () {
-    $ionicPlatform.ready(function () {
-      $cordovaOauth.twitter(Config.twitterKey, Config.twitterSecret)
-        .then(function (result) {
+  .controller('NewsCtrl', function ($scope, NewsService, $ionicLoading) {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+    NewsService.all().then(function (news) {
+      $scope.news = news;
+      $ionicLoading.hide();
+    });
+
+    $scope.refresh = function () {
+      NewsService.all().then(function (news) {
+        $scope.news = news;
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    };
+  })
+
+  .controller('DetailsCtrl', function ($scope, $state, NewsService, $ionicLoading) {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+    var id = $state.params.id;
+    NewsService.one(id).then(function (news) {
+      $scope.news = news;
+      $ionicLoading.hide();
+    });
+  })
+
+  .controller('ProfileCtrl', function ($scope, UserService) {
+    $scope.username = UserService.current().username;
+    $scope.logout = function () {
+      UserService.logout();
+    };
+  })
+
+  .controller('LoginCtrl', function ($scope, $state, $cordovaOauth, UserService, Config, $ionicPlatform, $ionicLoading, $cordovaPush) {
+    if (UserService.current()) {
+      $state.go('tab.news');
+    }
+    $scope.twitter = function () {
+      $ionicPlatform.ready(function () {
+        $cordovaOauth.twitter(Config.twitterKey, Config.twitterSecret).then(function (result) {
           $ionicLoading.show({
             template: 'Loading...'
           });
@@ -26,10 +58,7 @@
                 sound: true,
                 alert: true
               }).then(function (result) {
-                UserService.registerDevice({
-                  user: user, 
-                  token: result
-                }).then(function () {
+                UserService.registerDevice({user: user, token: result}).then(function () {
                   $ionicLoading.hide();
                   $state.go('tab.news');
                 }, function (err) {
@@ -43,36 +72,6 @@
         }, function (error) {
           console.log('error', error);
         });
-    });
-  };
-})  // end LoginCtrl
-
-//uses pull to refresh
-.controller('NewsCtrl', function ($scope, NewsService, $ionicLoading) {
-  $ionicLoading.show({
-    template: 'Loading...'
+      });
+    };
   });
-  NewsService.all().then(function (news) {
-    $scope.news = news;
-    $ionicLoading.hide();
-  });
-
-  $scope.refresh = function () {
-    NewsService.all().then(function (news) {
-      $scope.news = news;
-      $scope.$broadcast('scroll.refreshComplete');
-    });
-  };
-})  // end NewsCtrl
-
-.controller('DetailsCtrl', function ($scope, $state, NewsService, 
-                                     $ionicLoading) {
-  $ionicLoading.show({
-    template: 'Loading...'
-  });
-  var id = $state.params.id;
-  NewsService.one(id).then(function (news) {
-    $scope.news = news;
-    $ionicLoading.hide();
-  });
-}) // end DetailsCtrl
