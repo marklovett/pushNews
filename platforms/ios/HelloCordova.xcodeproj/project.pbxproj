@@ -43,6 +43,9 @@
 		8740E361FC5F4D058E1886AE /* UIWebViewExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9625A00807044D6A85C1195D /* UIWebViewExtension.m */; };
 		DC333CDD71E04351896AA90B /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4B95A71C0A4F52882F83DB /* CDVLogger.m */; };
 		1CACFF6D9DAF49C6B67F03AE /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E6FD85E3AE45CF98543E1C /* CDVDevice.m */; };
+		E533F62D5EAE42DFBDFAF75A /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0304F272F97C4B50BF70C54C /* CDVInAppBrowser.m */; };
+		E4C3493AF6C949B1AFE04190 /* AppDelegate+notification.m in Sources */ = {isa = PBXBuildFile; fileRef = FA63B758ACED445E8FC6F33B /* AppDelegate+notification.m */; };
+		EC419CDF69674EB49B6532A8 /* PushPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C373729DE01B4FAC8ABE65ED /* PushPlugin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +119,12 @@
 		C2D3851ED6904A69AAAFC055 /* CDVLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLogger.h"; path = "org.apache.cordova.console/CDVLogger.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		66E6FD85E3AE45CF98543E1C /* CDVDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVDevice.m"; path = "org.apache.cordova.device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		472082E9A63B469A942C8F1B /* CDVDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVDevice.h"; path = "org.apache.cordova.device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		0304F272F97C4B50BF70C54C /* CDVInAppBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVInAppBrowser.m"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		B604470329D645A3BB0E7468 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVInAppBrowser.h"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		FA63B758ACED445E8FC6F33B /* AppDelegate+notification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "AppDelegate+notification.m"; path = "com.phonegap.plugins.PushPlugin/AppDelegate+notification.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		C373729DE01B4FAC8ABE65ED /* PushPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "PushPlugin.m"; path = "com.phonegap.plugins.PushPlugin/PushPlugin.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		7234FFEF10C14EE2863BD3B0 /* AppDelegate+notification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AppDelegate+notification.h"; path = "com.phonegap.plugins.PushPlugin/AppDelegate+notification.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		FBB8B25F2BAB4DCB91B67069 /* PushPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "PushPlugin.h"; path = "com.phonegap.plugins.PushPlugin/PushPlugin.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +231,12 @@
 				C2D3851ED6904A69AAAFC055 /* CDVLogger.h */,
 				66E6FD85E3AE45CF98543E1C /* CDVDevice.m */,
 				472082E9A63B469A942C8F1B /* CDVDevice.h */,
+				0304F272F97C4B50BF70C54C /* CDVInAppBrowser.m */,
+				B604470329D645A3BB0E7468 /* CDVInAppBrowser.h */,
+				FA63B758ACED445E8FC6F33B /* AppDelegate+notification.m */,
+				C373729DE01B4FAC8ABE65ED /* PushPlugin.m */,
+				7234FFEF10C14EE2863BD3B0 /* AppDelegate+notification.h */,
+				FBB8B25F2BAB4DCB91B67069 /* PushPlugin.h */,
 			);
 			name = Plugins;
 			path = "HelloCordova/Plugins";
@@ -410,6 +425,9 @@
 				8740E361FC5F4D058E1886AE /* UIWebViewExtension.m in Sources */,
 				DC333CDD71E04351896AA90B /* CDVLogger.m in Sources */,
 				1CACFF6D9DAF49C6B67F03AE /* CDVDevice.m in Sources */,
+				E533F62D5EAE42DFBDFAF75A /* CDVInAppBrowser.m in Sources */,
+				E4C3493AF6C949B1AFE04190 /* AppDelegate+notification.m in Sources */,
+				EC419CDF69674EB49B6532A8 /* PushPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
