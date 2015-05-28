@@ -68,8 +68,8 @@
   function _ConfigService() {
     return {
       server: 'http://push-news.herokuapp.com',
-      twitterKey: 'your_twitter_key',
-      twitterSecret: 'your_twitter_secret'
+      twitterKey: 'oheEpZ95SOkdtIpSpX4IBRsLd',
+      twitterSecret: '0S8qHOtdzzcRx1nlAtEUEmvPCVVslv1K2A5aAZgDUW2wZIIm8A'
     };
   }
 
