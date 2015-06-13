@@ -1,20 +1,77 @@
-angular.module('starter.controllers', [])
+angular.module('app.controllers')
 
-.controller('DashCtrl', function($scope) {})
+  .controller('NewsCtrl', function ($scope, NewsService, $ionicLoading) {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+    NewsService.all().then(function (news) {
+      $scope.news = news;
+      $ionicLoading.hide();
+    });
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  }
-})
+    $scope.refresh = function () {
+      NewsService.all().then(function (news) {
+        $scope.news = news;
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    };
+  })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
+  .controller('DetailsCtrl', function ($scope, $state, NewsService, $ionicLoading) {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+    var id = $state.params.id;
+    NewsService.one(id).then(function (news) {
+      $scope.news = news;
+      $ionicLoading.hide();
+    });
+  })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
+  .controller('ProfileCtrl', function ($scope, UserService) {
+    $scope.username = UserService.current().username;
+    $scope.logout = function () {
+      UserService.logout();
+    };
+  })
+
+  .controller('LoginCtrl', function ($scope, $state, $cordovaOauth, UserService, Config, $ionicPlatform, $ionicLoading, $cordovaPush) {
+    if (UserService.current()) {
+      $state.go('tab.news');
+    }
+    $scope.twitter = function () {
+      $ionicPlatform.ready(function () {
+        $cordovaOauth.twitter(Config.twitterKey, Config.twitterSecret).then(function (result) {
+          $ionicLoading.show({
+            template: 'Loading...'
+          });
+          UserService.login(result).then(function (user) {
+            if (user.deviceToken) {
+              $ionicLoading.hide();
+              $state.go('tab.news');
+              return;
+            }
+
+            $ionicPlatform.ready(function () {
+              $cordovaPush.register({
+                badge: true,
+                sound: true,
+                alert: true
+              }).then(function (result) {
+                UserService.registerDevice({user: user, token: result}).then(function () {
+                  $ionicLoading.hide();
+                  $state.go('tab.news');
+                }, function (err) {
+                  console.log(err);
+                });
+              }, function (err) {
+                console.log('reg device error', err);
+              });
+            });
+          });
+        }, function (error) {
+          console.log('error', error);
+        });
+      });
+    };
+  });
