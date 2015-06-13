@@ -58,6 +58,9 @@
         },
         "com.phonegap.plugins.PushPlugin": {
             "PACKAGE_NAME": "com.ionicframework.starter"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "us.webexperts.PushNews"
         }
     },
     "dependent_plugins": {}
